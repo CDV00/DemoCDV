@@ -10,8 +10,7 @@ namespace Demo02_11.Domain.Models
         public string Name { get; set; }
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
-        /*public virtual Guid? DetailId { get; set; }
-        public virtual Detail Detail { get; set; }*/
+        public Detail Detail { get; set; } = new();
         
     }
 }

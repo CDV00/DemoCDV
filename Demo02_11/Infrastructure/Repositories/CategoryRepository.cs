@@ -10,7 +10,7 @@ namespace Demo02_11.Infrastructure.Repositories
 {
     public class CategoryRepository: BaseRepository<Category>,ICategoryRepository
     {
-        private MyContext _context;
+        private readonly MyContext _context;
         public CategoryRepository(MyContext context):base(context)
         {
             _context = context;

@@ -7,5 +7,9 @@ namespace Demo02_11.Infrastructure.ViewModel.Product
 {
     public class ProductResquest
     {
+        public Guid? Id { get; set; }
+        public string Name { get; set; }
+        public Guid CategoryId { get; set; }
+        public virtual Guid? DetailId { get; set; }
     }
 }

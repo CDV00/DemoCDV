@@ -25,9 +25,9 @@ namespace Demo02_11.Infrastructure.Repositories
 
         public IQueryable<T> GetAll() => DbSet.AsNoTracking();
 
-        public virtual async Task<T> GetById(T _object)
+        public virtual async Task<T> GetById(Guid id)
         {
-            var data = await DbSet.FindAsync(_object);
+            var data = await DbSet.FindAsync(id);
             return data;
         }
         public virtual async Task CreateAsync(T _object) => await DbSet.AddAsync(_object);

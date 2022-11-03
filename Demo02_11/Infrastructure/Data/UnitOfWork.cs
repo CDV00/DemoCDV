@@ -8,12 +8,23 @@ namespace Demo02_11.Infrastructure.Data
 {
     public class UnitOfWork:IUnitOfWork
     {
-        private MyContext _context;
+        private readonly MyContext _context;
+        public ICategoryRepository _CategoryRepository { get; }
 
-        public UnitOfWork(MyContext context)
+        public IProductRepository _ProductRepository { get; }
+
+        public IDetailRepository _DetailRepository { get; }
+
+        public UnitOfWork(MyContext context, ICategoryRepository categoryRepository, IProductRepository productRepository, IDetailRepository detailRepository)
         {
             _context = context;
+            _CategoryRepository = categoryRepository;
+            _ProductRepository = productRepository;
+            _DetailRepository = detailRepository;
         }
+
+        
+
         //private readonly UserDbContext _context;
 
         //public IUserRepository _userRepository;

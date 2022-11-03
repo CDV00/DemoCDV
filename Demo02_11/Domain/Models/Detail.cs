@@ -8,7 +8,7 @@ namespace Demo02_11.Domain.Models
         public string DetailA { get; set; }
         public string DetailB { get; set; }
         public Guid ProductId { get; set; }
-        public virtual Product? Product { get; set; }
+        public Product? Product { get; set; }
 
     }
 }

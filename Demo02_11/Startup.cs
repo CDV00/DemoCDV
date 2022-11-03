@@ -14,6 +14,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Demo02_11.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Demo02_11.Domain.Interfaces;
+using Demo02_11.Infrastructure.Repositories;
+using Demo02_11.Domain.Services;
+using AutoMapper;
+using Demo02_11.Domain.Extensions;
 
 namespace Demo02_11
 {
@@ -33,7 +38,34 @@ namespace Demo02_11
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MapperInitializer());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+
             services.AddControllers();
+            //unitOfworkk
+            services.AddScoped<IUnitOfWork,UnitOfWork>();
+            //Repositories
+            services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<ICategoryRepository,CategoryRepository>();
+            services.AddScoped<IProductRepository,ProductRepository>();
+            services.AddScoped<IDetailRepository,DetailRepository>();
+
+
+            //Service
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IDetailService, DetailService>();
+
+
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo02_11", Version = "v1" });
