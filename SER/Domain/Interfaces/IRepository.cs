@@ -1,6 +1,6 @@
 ﻿namespace SER.Domain.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> : IDisposable where T : class
     {
         Task CreateAsync(T _object);
         bool Delete(T _object);

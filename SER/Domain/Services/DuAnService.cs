@@ -59,6 +59,33 @@ namespace SER.Domain.Services
             try
             {   
                 var duAn = _mapper.Map<DuAnReponse>(await _unitOfWork._duAnRepository.GetById(id));
+                if(duAn is null)
+                {
+                    return new Reponse<DuAnReponse>(false, "Id khong ton tai!");
+                }
+                await _unitOfWork._duAnRepository.AddDM(null, duAn);
+                
+                return new Reponse<DuAnReponse>(
+                                                true,
+                                                "Thành công",
+                                                duAn
+                                             );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"{nameof(GetById)} function error on {nameof(DuAnService) + ex.Message}", typeof(DuAnService));
+                return new Reponse<DuAnReponse>(false, "đã có lỗi: " + ex.Message);
+            }
+        }
+        /*public async Task<Reponse<DuAnReponse>> GetKhokhanById(int id)
+        {
+            try
+            {
+                var duAn = _mapper.Map<DuAnReponse>(await _unitOfWork._duAnRepository.GetById(id));
+                if (duAn is null)
+                {
+                    return new Reponse<DuAnReponse>(false, "Id khong ton tai!");
+                }
                 await _unitOfWork._duAnRepository.AddDM(null, duAn);
 
                 return new Reponse<DuAnReponse>(
@@ -72,7 +99,7 @@ namespace SER.Domain.Services
                 _logger.LogError(ex, $"{nameof(GetById)} function error on {nameof(DuAnService) + ex.Message}", typeof(DuAnService));
                 return new Reponse<DuAnReponse>(false, "đã có lỗi: " + ex.Message);
             }
-        }
+        }*/
     }
 }
 

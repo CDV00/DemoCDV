@@ -15,6 +15,7 @@ builder.Logging.AddConsole();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //AddAutoMapper
+//builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<VI_GPMBContext>();
 //unitOfworkk
@@ -22,10 +23,12 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //Repositories
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IDuAnRepository, DuAnRepository>();
+builder.Services.AddScoped<IKhoKhanRepository, KhoKhanRepository>();
 //Service
 builder.Services.AddScoped(typeof(IBaseService<,,>), typeof(BaseService<,,>));
 builder.Services.AddScoped(typeof(IDanhMucService<>), typeof(DanhMucService<>));
 builder.Services.AddScoped<IDuAnService, DuAnService>();
+builder.Services.AddScoped<IKhoKhanService, KhoKhanService>();
 
 var app = builder.Build();
 

@@ -11,11 +11,13 @@ namespace SER.Infrastructure.Data
         //public IProductRepository _ProductRepository { get; }
 
         public IDuAnRepository _duAnRepository { get; }
+        public IKhoKhanRepository _khoKhanRepository { get; }
 
-        public UnitOfWork(VI_GPMBContext context, IDuAnRepository duAnRepository)
+        public UnitOfWork(VI_GPMBContext context, IDuAnRepository duAnRepository, IKhoKhanRepository khoKhanRepository)
         {
             _context = context;
             _duAnRepository = duAnRepository;
+            _khoKhanRepository = khoKhanRepository;
         }
 
 
@@ -45,5 +47,23 @@ namespace SER.Infrastructure.Data
         {
             await _context.DisposeAsync();
         }
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
     }
 }

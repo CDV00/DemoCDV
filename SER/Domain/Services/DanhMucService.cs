@@ -143,6 +143,10 @@ namespace SER.Domain.Services
             try
             {
                 var entity = await _repository.GetById(id);
+                if (entity == null)
+                {
+                    return new BaseReponse(false,"Danh muc khong ton tai!");
+                }
                 var Result = _repository.Delete(entity);
                 if (!Result)
                 {

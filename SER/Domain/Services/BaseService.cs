@@ -101,7 +101,10 @@ namespace SER.Domain.Services
 
                 var entity = await _repository.GetById(id);
                 //var productReponse = _mapper.Map<List<ProductReponse>>(products);
-
+                if (entity == null)
+                {
+                    return new Reponse<TReponse>(false, "Id khong ton tai!");
+                }
                 return new Reponse<TReponse>(
                                                 true,
                                                 "Thành công",
@@ -141,6 +144,10 @@ namespace SER.Domain.Services
             try
             {
                 var entity = await _repository.GetById(id);
+                if (entity == null)
+                {
+                    return new BaseReponse(false, "Id khong ton tai!");
+                }
                 var Result = _repository.Delete(entity);
                 if (!Result)
                 {
